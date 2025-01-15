@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Endpoints</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        .endpoint {
+            margin-bottom: 20px;
+        }
+        .endpoint h2 {
+            margin: 0;
+            font-size: 1.2em;
+            color: #007bff;
+        }
+        .endpoint p {
+            margin: 5px 0;
+        }
+        .endpoint pre {
+            background: #f8f8f8;
+            padding: 10px;
+            border: 1px solid #ddd;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>API Endpoints</h1>
+
+    <div class="endpoint">
+        <h2>GET /users</h2>
+        <p>Retrieve all users.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>sort_by</strong> (optional) - Field to sort by (username, first_name, last_name)</li>
+            <li><strong>order</strong> (optional) - Sort order (asc, desc)</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /users?sort_by=username&order=asc</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>POST /createUser</h2>
+        <p>Create a new user.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>username</strong> (required) - The username of the user</li>
+            <li><strong>password</strong> (required) - The password of the user</li>
+            <li><strong>first_name</strong> (required) - The first name of the user</li>
+            <li><strong>last_name</strong> (required) - The last name of the user</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>POST /createUser
+{
+    "username": "testuser",
+    "password": "Test1234",
+    "first_name": "Test",
+    "last_name": "User"
+}</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>PUT /users/:id</h2>
+        <p>Update an existing user by ID.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>id</strong> (required) - The ID of the user</li>
+            <li><strong>username</strong> (required) - The new username of the user</li>
+            <li><strong>password</strong> (required) - The new password of the user</li>
+            <li><strong>first_name</strong> (required) - The new first name of the user</li>
+            <li><strong>last_name</strong> (required) - The new last name of the user</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>PUT /users/1
+{
+    "username": "updateduser",
+    "password": "Updated1234",
+    "first_name": "Updated",
+    "last_name": "User"
+}</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>DELETE /users/:id</h2>
+        <p>Delete a user by ID.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>id</strong> (required) - The ID of the user</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>DELETE /users/1</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /users/search</h2>
+        <p>Search users by username.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>username</strong> (required) - The username to search for</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /users/search?username=testuser</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /users/searchByDetails</h2>
+        <p>Search users by username, first name, and last name.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>username</strong> (optional) - The username to search for</li>
+            <li><strong>first_name</strong> (optional) - The first name to search for</li>
+            <li><strong>last_name</strong> (optional) - The last name to search for</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /users/searchByDetails?username=testuser&first_name=Test&last_name=User</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>DELETE /deleteUsersBelowKills</h2>
+        <p>Delete users with less than a certain amount of kills (localhost only).</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>kills</strong> (required) - The minimum number of kills</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>DELETE /deleteUsersBelowKills?kills=10</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /statistics</h2>
+        <p>Retrieve all statistics.</p>
+        <h3>Example Request</h3>
+        <pre>GET /statistics</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>POST /addStatistics</h2>
+        <p>Create a new statistic.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>user_id</strong> (required) - The ID of the user</li>
+            <li><strong>kills</strong> (required) - The number of kills</li>
+            <li><strong>date</strong> (required) - The date of the statistic</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>POST /addStatistics
+{
+    "user_id": 1,
+    "kills": 10,
+    "date": "2023-01-01"
+}</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>PUT /statistics/:id</h2>
+        <p>Update an existing statistic by ID.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>id</strong> (required) - The ID of the statistic</li>
+            <li><strong>user_id</strong> (required) - The ID of the user</li>
+            <li><strong>kills</strong> (required) - The number of kills</li>
+            <li><strong>date</strong> (required) - The date of the statistic</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>PUT /statistics/1
+{
+    "user_id": 1,
+    "kills": 20,
+    "date": "2023-01-02"
+}</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>DELETE /statistics/:id</h2>
+        <p>Delete a statistic by ID.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>id</strong> (required) - The ID of the statistic</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>DELETE /statistics/1</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /statistics/paginate</h2>
+        <p>Retrieve statistics with pagination.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>limit</strong> (required) - The number of records to retrieve</li>
+            <li><strong>offset</strong> (required) - The number of records to skip</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /statistics/paginate?limit=10&offset=0</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /statistics/search</h2>
+        <p>Search statistics by date range.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>start_date</strong> (required) - The start date of the range</li>
+            <li><strong>end_date</strong> (optional) - The end date of the range</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /statistics/search?start_date=2023-01-01&end_date=2023-01-31</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /statistics/searchByDate</h2>
+        <p>Search statistics by a specific date.</p>
+        <h3>Parameters</h3>
+        <ul>
+            <li><strong>date</strong> (required) - The date to search for</li>
+        </ul>
+        <h3>Example Request</h3>
+        <pre>GET /statistics/searchByDate?date=2023-01-01</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /testRunning</h2>
+        <p>Check if the server is running.</p>
+        <h3>Example Request</h3>
+        <pre>GET /testRunning</pre>
+    </div>
+
+    <div class="endpoint">
+        <h2>GET /testEndpoints</h2>
+        <p>Test all endpoints.</p>
+        <h3>Example Request</h3>
+        <pre>GET /testEndpoints</pre>
+    </div>
+</body>
+</html>
